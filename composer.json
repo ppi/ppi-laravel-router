@@ -21,8 +21,8 @@
     ],
     "autoload": {
       "psr-4": {
-        "PPI\\Laravel\\": "src/",
-        "PPI\\LaravelTest\\": "tests/"
+        "PPI\\LaravelRouting\\": "src/",
+        "PPI\\LaravelRoutingTest\\": "tests/"
       }
     },
     "require": {
