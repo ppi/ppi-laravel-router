@@ -7,7 +7,7 @@
  * @link       http://www.ppi.io
  */
 
-namespace PPI\LaravelRouting;
+namespace PPI\LaravelRouting\Wrapper;
 
 use PPI\LaravelRouting\LaravelRouter;
 
