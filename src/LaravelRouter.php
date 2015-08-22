@@ -11,8 +11,8 @@
 
 namespace PPI\LaravelRouting;
 
-use Illuminate\Routing\Router as BaseRouter;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+use Illuminate\Routing\Router as BaseRouter;
 use Illuminate\Http\Request as LaravelRequest;
 
 /**
