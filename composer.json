@@ -19,6 +19,12 @@
           "homepage": "http://www.ppi.io/contributors"
       }
     ],
+    "autoload": {
+      "psr-4": {
+        "PPI\\Laravel\\": "src/",
+        "PPI\\LaravelTest\\": "tests/"
+      }
+    },
     "require": {
         "illuminate/routing": "~5.1",
         "illuminate/events": "~5.1"
