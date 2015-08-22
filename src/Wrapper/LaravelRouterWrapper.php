@@ -7,13 +7,15 @@
  * @link       http://www.ppi.io
  */
 
-namespace PPI\Framework\Router\Wrapper;
+namespace PPI\LaravelRouting;
+
+use PPI\LaravelRouting\LaravelRouter;
 
 use Illuminate\Routing\Route;
-use Symfony\Component\Routing\RequestContext as SymfonyRequestContext;
 use Illuminate\Http\Request as LaravelRequest;
-use PPI\Framework\Router\LaravelRouter;
 use Illuminate\Routing\UrlGenerator;
+
+use Symfony\Component\Routing\RequestContext as SymfonyRequestContext;
 use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
@@ -147,20 +149,29 @@ class LaravelRouterWrapper implements UrlGeneratorInterface, RequestMatcherInter
     {
         $parameters = $route->parameters();
         $parameters['_route'] = $this->request->getPathInfo();
-
         $action = $route->getAction();
 
-        if (is_array($action) && isset($action['uses']) && !empty($action['uses'])) {
+        // Controller@action
+        if(is_string($action)) {
+
+            list($parameters['_controller'], $parameters['action']) = explode('@', $action[0]);
+            return $parameters;
+
+        } else if(isset($action['uses']) && !empty($action['uses'])) {
+
+            // Callable
             if (is_callable($action['uses'])) {
                 $parameters['_controller'] = $action['uses'];
                 $parameters['action'] = $action['uses'];
-            }
-            return $parameters;
-        } else if (isset($action[0]) && is_string($action[0]) && strpos($action[0], '@')) {
-            list($parameters['_controller'], $parameters['action']) = explode('@', $action[0]);
-            return $parameters;
-        }
+                return $parameters;
 
+            // 'uses' => 'Controller@action'
+            } else if (is_string($action['uses']) && strpos($action['uses'], '@') !== false) {
+                list($parameters['_controller'], $parameters['action']) = explode('@', $action['uses']);
+                return $parameters;
+            }
+
+        }
 
         throw new \RuntimeException('Unable to parse laravel route parameters');
     }

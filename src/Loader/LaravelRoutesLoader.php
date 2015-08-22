@@ -7,7 +7,7 @@
  * @link       http://www.ppi.io
  */
 
-namespace PPI\Framework\Router\Loader;
+namespace PPI\LaravelRouting\Loader;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;

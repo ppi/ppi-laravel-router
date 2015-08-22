@@ -9,7 +9,7 @@
  * @link       http://www.ppi.io
  */
 
-namespace PPI\Framework\Router;
+namespace PPI\LaravelRouting;
 
 use Illuminate\Routing\Router as BaseRouter;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
